@@ -10,24 +10,19 @@ public class WordCounter{
         this.text = text;
     }
 
-    private String stripSpecialCharacters(String text) {
-        return text.replaceAll("[[\\.\\?\\!\\,\\;\\:\\{\\}\\(\\)\\']]", "");
-    }
-
-    private String[] indexText(String text) {
-        String[] words = text.split(" +");
-        return words;
+    private String[] stripSpecialCharactersAndIndex(String text) {
+        return text.replaceAll("[[\\.\\?\\!\\,\\;\\:\\{\\}\\(\\)\\']]", "").split(" +");
     }
 
     public String getWordCount() {
-        String word = stripSpecialCharacters(this.text);
-        return "this document has " + indexText(this.text).length + " words.";
+        String[] word = stripSpecialCharactersAndIndex(this.text);
+        return "this document has " + word.length + " words.";
     }
 
     public HashMap<String, Integer> getWordFrequency() {
-        String words = stripSpecialCharacters(this.text);
+        
 
-        String[] wordArr = indexText(words);
+        String[] wordArr = stripSpecialCharactersAndIndex(this.text);
         
         HashMap<String, Integer> wordDict = new HashMap<String, Integer>();
 
