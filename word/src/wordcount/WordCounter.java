@@ -1,5 +1,7 @@
 package wordcount;
 
+import java.util.HashMap;
+
 public class WordCounter{
 
     private String text;
@@ -8,7 +10,7 @@ public class WordCounter{
         this.text = text;
     }
 
-    private String stringSpecialCharacters(String text) {
+    private String stripSpecialCharacters(String text) {
         return text.replaceAll("[[\\.\\?\\!\\,\\;\\:\\{\\}\\(\\)\\']]", "");
     }
 
@@ -18,7 +20,26 @@ public class WordCounter{
     }
 
     public String getWordCount() {
-        String word = stringSpecialCharacters(this.text);
+        String word = stripSpecialCharacters(this.text);
         return "this document has " + indexText(this.text).length + " words.";
+    }
+
+    public HashMap<String, Integer> getTop50() {
+        String words = stripSpecialCharacters(this.text);
+
+        String[] wordArr = indexText(words);
+        
+        HashMap<String, Integer> wordDict = new HashMap<String, Integer>();
+
+        for (String word : wordArr) {
+            if (!wordDict.containsKey(word)) {
+                wordDict.put(word, 1);
+            } else {
+                int value = wordDict.get(word);
+                wordDict.replace(word, value + 1);
+            }
+        }
+
+        return wordDict;
     }
 }
