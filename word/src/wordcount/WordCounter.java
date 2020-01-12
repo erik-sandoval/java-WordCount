@@ -1,6 +1,6 @@
 package wordcount;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class WordCounter{
 
@@ -24,7 +24,7 @@ public class WordCounter{
         return "this document has " + indexText(this.text).length + " words.";
     }
 
-    public HashMap<String, Integer> getTop50() {
+    public HashMap<String, Integer> getWordFrequency() {
         String words = stripSpecialCharacters(this.text);
 
         String[] wordArr = indexText(words);
